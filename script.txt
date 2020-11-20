@@ -1,0 +1,53 @@
+input 
+  Preco(Close);
+
+var 
+ p: Float; // Pivot
+ s1: Float; // Suportes
+ s2: Float;
+ s3: Float;
+
+ r1: Float; // Resistências
+ r2: Float;
+ r3: Float;
+
+begin
+  p := Pivot(true, true)|0|;
+
+  s1 := Pivot(true, false)|4|;
+  s2 := Pivot(true, false)|2|;
+  s3 := Pivot(true, true)|2|;
+
+  r1 := Pivot(true, false)|3|;
+  r2 := Pivot(true, false)|1|;
+  r3 := Pivot(true, true)|1|;
+
+  // Venda
+  if (
+    ((High >= p) and (Close[1] < p) and (Open[1] < p))
+     or ((High >= s1) and (Close[1] < s1) and (Open[1] < s1))
+     or ((High >= s2) and (Close[1] < s2) and (Open[1] < s2))
+     or ((High >= s3) and (Close[1] < s3) and (Open[1] < s3))
+     or ((High >= r1) and (Close[1] < r1) and (Open[1] < r1))
+     or ((High >= r2) and (Close[1] < r2) and (Open[1] < r2))
+     or ((High >= r3) and (Close[1] < r3) and (Open[1] < r3))
+    ) then
+    begin
+      PaintBar(clRed);
+    end
+  else if (
+     ((Low <= p) and (Close[1] > p) and (Open[1] > p))
+     or ((Low <= s1) and (Close[1] > s1) and (Open[1] > s1))
+     or ((Low <= s2) and (Close[1] > s2) and (Open[1] > s2))
+     or ((Low <= s3) and (Close[1] > s3) and (Open[1] > s3))
+     or ((Low <= r1) and (Close[1] > r1) and (Open[1] > r1))
+     or ((Low <= r2) and (Close[1] > r2) and (Open[1] > r2))
+     or ((Low <= r3) and (Close[1] > r3) and (Open[1] > r3))
+    ) then
+    begin 
+      PaintBar(clGreen);
+    end;
+
+ // Plot(s3);
+
+end; 
